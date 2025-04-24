@@ -1,0 +1,1 @@
+export { default } from "file:///D:/WebstormProjects/test_nuxt/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

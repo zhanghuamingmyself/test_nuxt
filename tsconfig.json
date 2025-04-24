@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  },
+  "extends": "./.nuxt/tsconfig.json",
+  "include": [
+    "/entities/**/*.ts"
+  ]
+}
