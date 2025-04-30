@@ -2,7 +2,7 @@
 
 
 const data = useState("data", () => [])
-const url = useState("url", () => 'https://qx5aunrz52m.feishu.cn/wiki/Wkp7w0mGHiN2vCkY5Dacg2mBneg?table=tblLaeshowOosWAF&view=vewMeWJQfL')
+const url = useState("url", () => 'https://qx5aunrz52m.feishu.cn/wiki/XdzlwphCci9g4ZklGvcczUeanDb?table=tblIhnxXm6bltg5C&view=vewJq8ZLZh')
 const columns = useState("columns", () => [])
 
 divClick()
@@ -14,6 +14,7 @@ function divClick() {
       "url": url.value
     })
   }).then(res => {
+    columns.value=[]
     res.data.value.data['fieldList'].forEach(field => {
       columns.value.push({
         title: field.field_name +`(${field.feishu_field_id})`,
