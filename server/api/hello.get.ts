@@ -1,5 +1,5 @@
 import {getQuery} from "#imports";
-import pool from '~/server/utils/db';
+import {pool} from '~/server/utils/db';
 
 export default defineEventHandler(async (event:any) => {
     const query = getQuery(event)

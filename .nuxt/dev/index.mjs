@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, createError, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, getRequestURL, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://D:/WebstormProjects/test_nuxt/node_modules/h3/dist/index.mjs';
+import { Sequelize, DataTypes } from 'file://D:/WebstormProjects/test_nuxt/node_modules/sequelize/lib/index.mjs';
 import mysql from 'file://D:/WebstormProjects/test_nuxt/node_modules/mysql2/promise.js';
 import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://D:/WebstormProjects/test_nuxt/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { stringify, uneval } from 'file://D:/WebstormProjects/test_nuxt/node_modules/devalue/index.js';
@@ -832,6 +833,7 @@ const _4r0pOA = defineEventHandler((event) => {
 const _lazy_g7HJXs = () => Promise.resolve().then(function () { return _name_$1; });
 const _lazy_RL74KO = () => Promise.resolve().then(function () { return table_post$1; });
 const _lazy_SbfUfC = () => Promise.resolve().then(function () { return hello_get$1; });
+const _lazy_Mm3xGZ = () => Promise.resolve().then(function () { return created_post$1; });
 const _lazy_CPsRzp = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
@@ -839,6 +841,7 @@ const handlers = [
   { route: '/api/a/:name', handler: _lazy_g7HJXs, lazy: true, middleware: false, method: undefined },
   { route: '/api/feishu/table', handler: _lazy_RL74KO, lazy: true, middleware: false, method: "post" },
   { route: '/api/hello', handler: _lazy_SbfUfC, lazy: true, middleware: false, method: "get" },
+  { route: '/api/user/created', handler: _lazy_Mm3xGZ, lazy: true, middleware: false, method: "post" },
   { route: '/__nuxt_error', handler: _lazy_CPsRzp, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_CPsRzp, lazy: true, middleware: false, method: undefined }
 ];
@@ -1048,6 +1051,21 @@ const _name_$1 = /*#__PURE__*/Object.freeze({
   default: _name_
 });
 
+const sequelize = new Sequelize(
+  process.env.MYSQL_DATABASE || "hc_zhm",
+  process.env.MYSQL_USER || "root",
+  process.env.MYSQL_PASSWORD || "root",
+  {
+    host: process.env.MYSQL_HOST || "172.24.73.24",
+    port: parseInt(process.env.MYSQL_PORT || "3307"),
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 1e4
+    },
+    dialect: "mysql"
+  }
+);
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST || "172.24.73.24",
   port: parseInt(process.env.MYSQL_PORT || "3307"),
@@ -1103,6 +1121,49 @@ const hello_get = defineEventHandler(async (event) => {
 const hello_get$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   default: hello_get
+});
+
+const User = sequelize.define("zhm_users", {
+  id: {
+    type: DataTypes.INTEGER,
+    field: "id",
+    primaryKey: true,
+    autoIncrement: true
+  },
+  username: {
+    type: DataTypes.STRING,
+    field: "username",
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    field: "email",
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true
+    }
+  }
+  // 其他属性和选项
+});
+async function createUser() {
+  await sequelize.sync();
+  const user = await User.create({ username: "John", email: "john@example.com" });
+  return user.toJSON();
+}
+
+const created_post = defineEventHandler(async (event) => {
+  const query = getQuery$1(event);
+  const res = createUser().catch(console.error);
+  return {
+    hello: `Hello ${query["name"]}`,
+    rows: res
+  };
+});
+
+const created_post$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  default: created_post
 });
 
 const Vue3 = version.startsWith("3");

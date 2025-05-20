@@ -1,21 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
 export default defineNuxtConfig({
-  ssr: true,
-  devtools: { enabled: true },
+    ssr: true,
+    devtools: {enabled: true},
 
-  plugins: [
-    // 确保在服务器端渲染前运行
-  ],
+    plugins: [
+        // 确保在服务器端渲染前运行
+    ],
+    buildModules: ['nuxt-storm',],
+    modules: ["@ant-design-vue/nuxt"],
 
-  modules: ["@ant-design-vue/nuxt"],
-
-  routeRules:{
-
-  },
-  nitro: {
-    database: {
-
+    routeRules: {},
+    nitro: {
+        database: {}
     }
-  }
 })

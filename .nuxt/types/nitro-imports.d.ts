@@ -19,7 +19,7 @@ declare global {
   const createEvent: typeof import('../../node_modules/h3')['createEvent']
   const createEventStream: typeof import('../../node_modules/h3')['createEventStream']
   const createRouter: typeof import('../../node_modules/h3')['createRouter']
-  const db: typeof import('../../server/utils/db')['default']
+  const createUser: typeof import('../../server/utils/dbUser')['createUser']
   const defaultContentType: typeof import('../../node_modules/h3')['defaultContentType']
   const defineAppConfig: typeof import('../../node_modules/nuxt/dist/core/runtime/nitro/config')['defineAppConfig']
   const defineCachedEventHandler: typeof import('../../node_modules/nitropack/dist/runtime')['defineCachedEventHandler']
@@ -81,6 +81,7 @@ declare global {
   const lazyEventHandler: typeof import('../../node_modules/h3')['lazyEventHandler']
   const nitroPlugin: typeof import('../../node_modules/nitropack/dist/runtime')['nitroPlugin']
   const parseCookies: typeof import('../../node_modules/h3')['parseCookies']
+  const pool: typeof import('../../server/utils/db')['pool']
   const promisifyNodeListener: typeof import('../../node_modules/h3')['promisifyNodeListener']
   const proxyRequest: typeof import('../../node_modules/h3')['proxyRequest']
   const readBody: typeof import('../../node_modules/h3')['readBody']
@@ -101,6 +102,7 @@ declare global {
   const sendRedirect: typeof import('../../node_modules/h3')['sendRedirect']
   const sendStream: typeof import('../../node_modules/h3')['sendStream']
   const sendWebResponse: typeof import('../../node_modules/h3')['sendWebResponse']
+  const sequelize: typeof import('../../server/utils/db')['sequelize']
   const serveStatic: typeof import('../../node_modules/h3')['serveStatic']
   const setCookie: typeof import('../../node_modules/h3')['setCookie']
   const setHeader: typeof import('../../node_modules/h3')['setHeader']
@@ -131,4 +133,5 @@ export { appendCorsHeaders, appendCorsPreflightHeaders, appendHeader, appendHead
 export { useDatabase } from '../../node_modules/nitropack/dist/runtime/database';
 export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '../../node_modules/nuxt/dist/core/runtime/nitro/paths';
 export { defineAppConfig } from '../../node_modules/nuxt/dist/core/runtime/nitro/config';
-export { default as db } from '../../server/utils/db';
+export { sequelize, pool } from '../../server/utils/db';
+export { createUser } from '../../server/utils/dbUser';

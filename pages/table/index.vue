@@ -2,7 +2,7 @@
 
 
 const data = useState("data", () => [])
-const url = useState("url", () => 'https://qx5aunrz52m.feishu.cn/wiki/XdzlwphCci9g4ZklGvcczUeanDb?table=tblIhnxXm6bltg5C&view=vewJq8ZLZh')
+const url = useState("url", () => 'https://qx5aunrz52m.feishu.cn/wiki/Wkp7w0mGHiN2vCkY5Dacg2mBneg?table=tblpvvOneE9Zz7wC&view=vewqTS7Y3p')
 const columns = useState("columns", () => [])
 
 divClick()
