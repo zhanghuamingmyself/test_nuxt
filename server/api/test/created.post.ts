@@ -1,10 +1,11 @@
 import {getQuery} from "#imports";
-import {createUser} from "../../utils/dbUser";
+import {createTest} from "../../utils/dbTest";
+
 
 export default defineEventHandler(async (event: any) => {
     const query = getQuery(event)
 
-    const res = createUser().catch(console.error);
+    const res = createTest().catch(console.error);
 
     return {
         hello: `Hello ${query['name']}`,
