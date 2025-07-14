@@ -1,5 +1,4 @@
 import {getQuery} from "#imports";
-import {pool} from '~/server/utils/db';
 import {createUser} from "../../utils/dbUser";
 
 export default defineEventHandler(async (event: any) => {
